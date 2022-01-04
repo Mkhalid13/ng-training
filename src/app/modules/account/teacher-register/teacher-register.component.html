@@ -1,0 +1,125 @@
+<div class="form-area">
+
+  <div class="alert alert-primary row justify-content-between align-items-center">
+    <span>Login</span>
+    <button mat-flat-button color="basic" routerLink="/register">Don't have an account? Register</button>
+  </div>
+
+
+  <form #registerForm="ngForm" (ngSubmit)="TeacherRegister(registerForm)" novalidate>
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Full Name</mat-label>
+          <input matInput name="FullName" [(ngModel)]="RegisterForm.FullName" required>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Age</mat-label>
+          <input matInput type="number" min="18" max="60" name="Age" [(ngModel)]="RegisterForm.Age" required>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Gender</mat-label>
+          <mat-select name="GenderId" [(ngModel)]="RegisterForm.GenderId" required>
+            <mat-option value="1">Male</mat-option>
+            <mat-option value="2">Female</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Country</mat-label>
+          <mat-select name="CountryId" [(ngModel)]="RegisterForm.CountryId" required>
+            <mat-option value="1">Egypt</mat-option>
+            <mat-option value="2">Saudi Arabia</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" name="Email" [(ngModel)]="RegisterForm.Email" required>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" name="password" [(ngModel)]="RegisterForm.password" required>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Qualification</mat-label>
+          <input matInput type="text" name="Qualification" [(ngModel)]="RegisterForm.Qualification" required>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Year of graduation</mat-label>
+          <input matInput type="number" name="YearOfQualifications" [(ngModel)]="RegisterForm.YearOfQualifications"
+            required>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Did you study Tagweed before?</mat-label>
+          <mat-select name="StudyTagweed" [(ngModel)]="RegisterForm.StudyTagweed" required>
+            <mat-option value="true">Yes</mat-option>
+            <mat-option value="false">No</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Did you teach Quran before?</mat-label>
+          <mat-select name="TeachQuranBefore" [(ngModel)]="RegisterForm.TeachQuranBefore" required>
+            <mat-option value="true">Yes</mat-option>
+            <mat-option value="false">No</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Quran Parts Memorized</mat-label>
+          <input matInput type="number" name="PartsNumber" [(ngModel)]="RegisterForm.PartsNumber" required>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Expected Work hours ( Weekly )</mat-label>
+          <input matInput type="number" name="WeekHours" [(ngModel)]="RegisterForm.WeekHours" required>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Prefered Language</mat-label>
+          <mat-select name="AppLangId" [(ngModel)]="RegisterForm.AppLangId" required>
+            <mat-option value="1">Arabic</mat-option>
+            <mat-option value="2">English</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+
+
+      <div class="col-md-12">
+        <button mat-flat-button color="primary" style="margin-top: 20px;">Login</button>
+
+      </div>
+    </div>
+  </form>

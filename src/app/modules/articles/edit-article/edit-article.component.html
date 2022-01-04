@@ -1,0 +1,46 @@
+<div class="form-area" *ngIf="articleDetails">
+
+  <div class="alert alert-primary row justify-content-between align-items-center">
+    <span>Edit Article</span>
+    <button mat-flat-button color="basic" routerLink="/articles">Back To Articles</button>
+  </div>
+
+  <form #updateArticleForm="ngForm" (ngSubmit)="updateArticle(updateArticleForm)" novalidate>
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Title</mat-label>
+          <input matInput ngModel="{{articleDetails.CatName}}" name="CatName">
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Cat name</mat-label>
+          <mat-select>
+            <mat-option value="one">First option</mat-option>
+            <mat-option value="two">Second option</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-12" *ngFor="let articleContent of articleDetails.ArticleDetails">
+
+        <mat-form-field appearance="outline">
+          <mat-label>Article Title <span [innerText]="articleContent.LanguageId == 1 ? '(AR)': '(En)' "></span>
+          </mat-label>
+          <input matInput ngModel="{{articleContent.Title}}" name="articleTitle_{{getCurrentLang(articleContent.LanguageId)}}">
+        </mat-form-field>
+
+
+        <mat-form-field appearance="outline">
+          <mat-label>Article Content <span [innerText]="articleContent.LanguageId == 1 ? '(AR)': '(En)' "></span>
+          </mat-label>
+          <textarea matInput name="articleDetails_{{getCurrentLang(articleContent.LanguageId)}}" ngModel="{{articleContent.Details}}">{{articleContent.Details}}</textarea>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-12">
+        <button mat-flat-button color="primary" style="margin: 20px 0;">Update Article</button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,57 @@
+<button mat-flat-button color="primary" style="margin-top: 20px;" routerLink="/articles/new">Add New Article</button>
+
+<div class="data-table" style="margin-top: 20px;">
+  <table mat-table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="Id">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let element"> {{element.Id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="CatName">
+      <th mat-header-cell *matHeaderCellDef> CatName </th>
+      <td mat-cell *matCellDef="let element"> {{element.CatName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="CreatedBy">
+      <th mat-header-cell *matHeaderCellDef> Created By </th>
+      <td mat-cell *matCellDef="let element"> {{element.CreatedBy}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="ImageURL">
+      <th mat-header-cell *matHeaderCellDef> Image </th>
+      <td mat-cell *matCellDef="let element"> <img width="50px" height="50px" src="{{element.ImageURL}}"> </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let element">
+        <button routerLink="/articles/edit/{{element.Id}}" mat-icon-button color="primary">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="openDialog(element.CatName , element.Id)">
+          <!-- <button mat-icon-button color="warn" (click)="openDialog()" (click)="deleteArticle(element.Id)"> -->
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+  </mat-paginator>
+</div>
+
+<ng-template style="width: 100%;" #confirmDialog>
+  <h2 mat-dialog-title>Delete Article ({{articleName}})</h2>
+  <mat-dialog-content class="mat-typography">
+    <h3>Are you sure?</h3>
+
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Delete</button>
+  </mat-dialog-actions>
+</ng-template>
