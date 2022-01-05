@@ -6,21 +6,52 @@
   </div>
 
 
-  <form #forgetForm="ngForm" (ngSubmit)="forgetPass(forgetForm)" novalidate>
+  <form #forgetForm="ngForm" (ngSubmit)="forgetPass(forgetForm)" novalidate *ngIf="forgetPassForm">
+    <h4>Enter your Email</h4>
     <div class="row">
       <div class="col-md-12">
         <mat-form-field appearance="outline">
           <mat-label>User Email</mat-label>
-          <input matInput name="Email" ngModel>
+          <input matInput name="Email" [(ngModel)]="userEmail">
 
         </mat-form-field>
       </div>
 
+      <div class="col-md-12">
+        <button mat-flat-button color="primary" style="margin-top: 20px;">Submit</button>
+      </div>
+    </div>
+  </form>
+
+
+  <form #resetForm="ngForm" (ngSubmit)="resetPass(resetForm)" novalidate *ngIf="resetPassForm">
+    <h4>Check ur mail and add the code and your new password</h4>
+
+    <div class="row">
+      <div class="col-md-12">
+        <mat-form-field appearance="outline">
+          <mat-label>User Email</mat-label>
+          <input matInput name="Email" [(ngModel)]="userEmail">
+        </mat-form-field>
+      </div>
+      <div class="col-md-12">
+
+        <mat-form-field appearance="outline">
+          <mat-label>Code</mat-label>
+          <input matInput name="EmailCode" ngModel>
+        </mat-form-field>
+      </div>
+      <div class="col-md-12">
+
+        <mat-form-field appearance="outline">
+          <mat-label>New Password</mat-label>
+          <input matInput type="password" name="NewPassword" ngModel>
+        </mat-form-field>
+      </div>
 
 
       <div class="col-md-12">
         <button mat-flat-button color="primary" style="margin-top: 20px;">Submit</button>
-
       </div>
     </div>
   </form>

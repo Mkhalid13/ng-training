@@ -11,23 +11,36 @@ import { environment } from 'src/environments/environment';
 })
 export class ForgetPassComponent implements OnInit {
 
-  constructor(private http: HttpClient , private toaster: ToastrService) { }
+  constructor(private http: HttpClient, private toaster: ToastrService) { }
 
+  userEmail:string
+  resetPassForm: boolean = false
+  forgetPassForm: boolean = true
 
   forgetPass(form: NgForm) {
 
-    this.http.post(`${environment.fa_baseURL}Account/ForgotPassword` , form.value).subscribe(
+    this.http.post(`${environment.fa_baseURL}Account/ForgotPassword`, form.value).subscribe(
       res => {
         this.toaster.success(res['message'])
+        this.resetPassForm = true
+        this.forgetPassForm = false
       },
-
       error => {
         this.toaster.error(error.error.message)
       }
-
     )
+  }
 
+  resetPass(form: NgForm) {
 
+    this.http.post(`${environment.fa_baseURL}Account/ResetPassword`, form.value).subscribe(
+      res => {
+        this.toaster.success(res['message'])
+      },
+      error => {
+        this.toaster.error(error.error.message)
+      }
+    )
   }
 
 
