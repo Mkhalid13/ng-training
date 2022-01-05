@@ -1,0 +1,158 @@
+<div class="example-container mat-elevation-z8">
+  <div class="example-loading-shade" *ngIf="isLoadingResults">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+
+  </div>
+
+  <div class="example-table-container">
+    <table mat-table [dataSource]="data" class="example-table" matSort matSortActive="created" matSortDisableClear
+      matSortDirection="desc">
+      <!-- Number Column -->
+      <!-- <ng-container matColumnDef="Index">
+        <th mat-header-cell *matHeaderCellDef>#</th>
+        <td mat-cell *matCellDef="let row; let i = index">{{i + 1}}</td>
+      </ng-container> -->
+
+      <!-- Title Column -->
+      <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+        <td mat-cell *matCellDef="let row">{{row.FullName}}</td>
+      </ng-container>
+
+      <!-- State Column -->
+      <ng-container matColumnDef="Email">
+        <th mat-header-cell *matHeaderCellDef>Email</th>
+        <td mat-cell *matCellDef="let row">{{row.Email}}</td>
+      </ng-container>
+
+      <!-- Created Column -->
+      <ng-container matColumnDef="Country">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+          Country
+        </th>
+        <td mat-cell *matCellDef="let row">{{ row.CountryId == 1 ? 'Saudi Arabia' : 'Egypt' }}
+        </td>
+      </ng-container>
+
+      <!-- Created Column -->
+      <ng-container matColumnDef="Gender">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+          Gender
+        </th>
+        <td mat-cell *matCellDef="let row">{{ row.GenderId == 1 ? 'Male' : 'Female' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Age">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+          Age
+        </th>
+        <td mat-cell *matCellDef="let row">{{row.Age}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+          Approval
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <!-- <mat-icon color="primary" *ngIf="row.IsApproved">check_circle</mat-icon>
+          <mat-icon color="error" *ngIf="!row.IsApproved">cancel</mat-icon> -->
+          <mat-icon style="cursor: pointer;" mat-raised-button matTooltip="Click To {{row.IsApproved ? 'UnApprove' : 'Approve'}}" matTooltipPosition="above"
+            color="{{row.IsApproved ? 'primary' : 'error'}}" (click)="changeTeacherStatus(row.Id , row.IsApproved)">{{row.IsApproved ? 'check_circle' : 'cancel'}}</mat-icon>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let element">
+          <button routerLink="/articles/edit/{{element.Id}}" mat-icon-button color="primary">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="openDialog(element.CatName , element.Id)">
+            <!-- <button mat-icon-button color="warn" (click)="openDialog()" (click)="deleteArticle(element.Id)"> -->
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+  <mat-paginator [length]="resultsLength" [pageSize]="pageSize" (page)="getTeachers($event)"></mat-paginator>
+</div>
+
+<!-- add category -->
+<ng-template style="width: 100%;" #addCategoryModal>
+  <form #addForm="ngForm" (ngSubmit)="addCategory(addForm)" novalidate>
+
+    <h2 mat-dialog-title>Add New Category</h2>
+    <mat-dialog-content class="mat-typography">
+      <div class="row">
+        <div class="col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Name (En)</mat-label>
+            <input matInput name="name" ngModel required>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Name ( Ar)</mat-label>
+            <input matInput name="name_ar" ngModel>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-12">
+          <mat-form-field appearance="outline">
+            <mat-label>Description (En)</mat-label>
+            <textarea matInput name="description" ngModel required></textarea>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-12">
+          <mat-form-field appearance="outline">
+            <mat-label>Description ( Ar)</mat-label>
+            <textarea matInput name="description_ar" ngModel></textarea>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Color</mat-label>
+            <input matInput type="color" name="color" ngModel required>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Image</mat-label>
+            <input matInput type="text" name="image" ngModel="mdi_other" required>
+          </mat-form-field>
+        </div>
+
+      </div>
+
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close="no">Cancel</button>
+      <button type="submit" mat-flat-button color="primary">Add</button>
+    </mat-dialog-actions>
+  </form>
+
+</ng-template>
+
+<!-- delete category -->
+<ng-template style="width: 100%;" #deleteCategory>
+  <h2 mat-dialog-title>Delete {{categoryName}}</h2>
+  <mat-dialog-content class="mat-typography">
+    <h3>Are you sure?</h3>
+
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Delete</button>
+  </mat-dialog-actions>
+</ng-template>

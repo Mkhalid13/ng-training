@@ -12,6 +12,8 @@ import { AuthGuard } from './services/auth.guard';
 import { LoggedInAuthGuard } from './services/auth.LoggedIn.guard';
 import { FaLoginComponent } from './modules/fa-account/fa-login/fa-login.component';
 import { TeacherRegisterComponent } from './modules/account/teacher-register/teacher-register.component';
+import { TeachersComponent } from './modules/teachers/teachers.component';
+import { ForgetPassComponent } from './modules/fa-account/forget-pass/forget-pass.component';
 
 const routes: Routes = [
   { path: 'goals', component: GoalsComponent },
@@ -24,6 +26,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent , canActivate:[LoggedInAuthGuard] }, // Akooon Login
   { path: 'fa-login', component: FaLoginComponent }, // Fa login
   { path: 'teacher-register', component: TeacherRegisterComponent },
+  { path: 'teachers', component: TeachersComponent },
+  { path: 'forget-pass', component: ForgetPassComponent },
 
 ];
 

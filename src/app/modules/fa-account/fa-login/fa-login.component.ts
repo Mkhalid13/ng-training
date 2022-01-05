@@ -24,6 +24,7 @@ export class FaLoginComponent implements OnInit {
     password: "",
   }
 
+  hide = true;
   ValidateLogin(form: NgForm) {
 
     this.auth.faLogin(form.value.username, form.value.password).subscribe(

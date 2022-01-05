@@ -24,6 +24,8 @@ import { LoggedInAuthGuard } from './services/auth.LoggedIn.guard';
 import { FaAccountComponent } from './modules/fa-account/fa-account.component';
 import { FaLoginComponent } from './modules/fa-account/fa-login/fa-login.component';
 import { TeacherRegisterComponent } from './modules/account/teacher-register/teacher-register.component';
+import { TeachersComponent } from './modules/teachers/teachers.component';
+import { ForgetPassComponent } from './modules/fa-account/forget-pass/forget-pass.component';
 
 
 @NgModule({
@@ -41,6 +43,8 @@ import { TeacherRegisterComponent } from './modules/account/teacher-register/tea
     FaAccountComponent,
     FaLoginComponent,
     TeacherRegisterComponent,
+    TeachersComponent,
+    ForgetPassComponent,
   ],
   imports: [
     BrowserModule,
